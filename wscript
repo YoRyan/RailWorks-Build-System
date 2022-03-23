@@ -10,6 +10,8 @@ from zipfile import ZipFile, ZIP_LZMA
 from waflib.Task import Task
 
 
+import sys
+sys.dont_write_bytecode = True
 from wafenv import *
 
 top = '.'
