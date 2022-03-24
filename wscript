@@ -5,7 +5,7 @@ import re
 import os
 import winreg
 from collections import OrderedDict
-from zipfile import ZipFile, ZIP_LZMA
+from zipfile import ZipFile
 
 from waflib.Task import Task
 
@@ -174,7 +174,7 @@ def release(ctx):
         '**/*.bin',
         '**/*.out',
     ]
-    with ZipFile(f'{APPNAME}-{VERSION}.zip', 'w', compression=ZIP_LZMA) as zip:
+    with ZipFile(f'{APPNAME}-{VERSION}.zip', 'w') as zip:
         for f in itertools.chain(*(out_dir.ant_glob(glob) for glob in files)):
             zip.write(f.abspath(), arcname=f'{root}/{f.path_from(out_dir)}')
         for f in ctx.path.ant_glob('Docs/**/*'):
